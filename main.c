@@ -10,7 +10,15 @@ int offset = 10;
 HANDLE wHnd;
 HANDLE rHnd;
 
+struct pos
+{
+	int x;
+	int y;	
+};
+struct pos Pos;
+
 //Prototypes
+void setPos(int x, int y, HANDLE hConsole);
 void cls( HANDLE hConsole );
 unsigned int pseudoRandom(unsigned int start_range, unsigned int end_range);
 void printChar(int offsets);
@@ -26,7 +34,7 @@ int main(int argc, char* argv[])
 	SMALL_RECT windowSize = {0, 0, width, 30};
 	SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
-	COORD bufferSize = {10, 10};
+	COORD bufferSize = {20, 20};
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 
 	HANDLE hStdout;
@@ -34,10 +42,26 @@ int main(int argc, char* argv[])
 	hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	cls(hStdout);
 
-	printChar(offset);
+
+
+	// qu'est-ce que je fais ? game loop ??
+	Pos.x = 30;
+	Pos.y = 30;
+	//game loop
+	while(1)
+	{
+		setPos(Pos.x++,Pos.y++, hStdout);
+		printChar(offset);
+	}
 
 	// Exit 
 	return(0);
+}
+
+void setPos(int x, int y, HANDLE hConsole)
+{
+	COORD coordScreen = { x, y };
+	SetConsoleCursorPosition( hConsole, coordScreen );
 }
 
 void cls( HANDLE hConsole )
@@ -90,7 +114,7 @@ void printChar(int offsets)
 		//fair en sorte que tant que l'usager n'appuie pas sur une lettre on continue le program
 	int nbBuffer = 0; 
 
-	while(1)
+	//while(1)
 	{
 		char buffer[120];
 		int i = 0;
