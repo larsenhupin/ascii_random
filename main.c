@@ -4,7 +4,6 @@
 
 #define MAX 120
 
-// globals
 const int width = 120;
 int offset = 10;
 HANDLE wHnd;
@@ -17,7 +16,6 @@ struct pos
 };
 struct pos Pos;
 
-//Prototypes
 void setPos(int x, int y, HANDLE hConsole);
 void cls( HANDLE hConsole );
 unsigned int pseudoRandom(unsigned int start_range, unsigned int end_range);
@@ -29,7 +27,7 @@ int main(int argc, char* argv[])
 	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
 	rHnd = GetStdHandle(STD_INPUT_HANDLE);
 
-	SetConsoleTitle("asteroid !!");
+	SetConsoleTitle("ascii_random");
 
 	SMALL_RECT windowSize = {0, 0, width, 30};
 	SetConsoleWindowInfo(wHnd, 1, &windowSize);
@@ -42,19 +40,14 @@ int main(int argc, char* argv[])
 	hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	cls(hStdout);
 
-
-
-	// qu'est-ce que je fais ? game loop ??
 	Pos.x = 30;
 	Pos.y = 30;
-	//game loop
+
 	while(1)
 	{
 		setPos(Pos.x++,Pos.y++, hStdout);
 		printChar(offset);
 	}
-
-	// Exit 
 	return(0);
 }
 
@@ -111,10 +104,9 @@ void cls( HANDLE hConsole )
 
 void printChar(int offsets)
 {
-		//fair en sorte que tant que l'usager n'appuie pas sur une lettre on continue le program
 	int nbBuffer = 0; 
 
-	//while(1)
+	while(1)
 	{
 		char buffer[120];
 		int i = 0;
@@ -133,13 +125,13 @@ void printChar(int offsets)
 		printf("%s \n", buffer);
 
 		nbBuffer++;
-		_sleep(60);
+		Sleep(60);
 	}
 }
 
 unsigned int pseudoRandom(unsigned int start_range, unsigned int end_range)
 {
-	static unsigned int rand = 44257;
+	static unsigned int rand = 4257;
 
 	if(start_range == end_range){
 		return start_range;
