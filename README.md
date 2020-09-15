@@ -1,4 +1,4 @@
-# ascii random
+# Random ascii generator
 Console-based random ascii generator </br>
 
 
